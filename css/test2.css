@@ -1,0 +1,64 @@
+@charset "utf-8";
+.bt { font-size:150%; text-align:center; font-weight:bold;
+}
+.inf {
+	width:80%;
+	border: 1px solid #CCC;
+	height:40px;
+	margin: 20px auto;
+}
+.class {
+	margin-left:1%;
+	width:33%;
+	height:40px;
+	text-align:left;
+	line-height:40px;
+	float:left;
+}
+.id,.name {
+	width:33%;
+	float:left;
+	height:40px;
+	line-height:40px;
+}
+.top {
+	width:80%;
+    height:40px;
+	margin: auto;
+	border: 1px solid #CCC;
+}
+.suj {
+	margin-left:1%;
+	width:33%;
+	text-align:left;
+	float:left;
+	height: 40px;
+	line-height: 40px;
+}
+.time,.ach{
+	width:33%;
+	float:left;
+	height:40px;
+	line-height:40px;
+}
+.tkt,.xzt,.dxt,.pdt,.jdt{
+	width: 80%;
+	border:1px solid #CCC;
+	margin: 20px auto;
+
+}
+.t-top,.x-top,.d-top,.p-top,.j-top{
+	text-indent: 1%;
+	font-size: 100%;
+	font-weight: bold;
+	height: 45px;
+	line-height: 45px;
+	background-color: #F5F5F5;
+}
+.t-main,.x-main,.d-main,.p-main,.j-main{
+	text-indent: 3%;
+}
+.but{
+	margin: auto;
+	width: 10% ;
+}

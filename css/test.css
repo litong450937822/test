@@ -1,0 +1,25 @@
+body, ul, p { margin: 0; padding: 0; }
+body { font: normal 12px 微软雅黑; }
+img { border: 0; }
+#main {
+    margin:auto;
+    width:900px;
+    text-align:left;
+    padding:50px;
+}
+body { padding-top: 42px;  color: #6c6c6c; background-image:url(../images/685066.jpg); background-position:center top; background-repeat:no-repeat;
+}
+.Navil,.Navim{
+    background-image: url(../img/nav.png);
+}
+.Navil{
+    width: 840px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    height: 75px;
+    background-repeat: repeat-x;
+    background-position: 0 -75px;
+}
+.Navir{left: 1080px;}
+.Navim{left: 840px; position: absolute; width: 240px; height: 75px; top: 0;}

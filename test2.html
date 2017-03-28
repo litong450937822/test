@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html" charset="utf-8" />
+<title>统一建模语言理论测试</title>
+<link href="css/test2.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<script type="text/javascript">
+  function button1() {
+      //必填项初始化
+      document.getElementById('Tc').style.removeProperty("color");
+      document.getElementById('Ti').style.removeProperty("color");
+      document.getElementById('Tn').style.removeProperty("color");
+      document.getElementById('Tclass').style.removeProperty("border");
+      document.getElementById('Tid').style.removeProperty('border');
+      document.getElementById('Tname').style.removeProperty('border');
+      //检验必填项
+      if(Tclass.value==""| Tname.value=="" | Tid.value==""){
+          alert("基本信息未填写完毕");
+          if(Tname.value==""){
+              Tname.focus();
+              document.getElementById('Tn').style.color = "red";
+              document.getElementById('Tname').style.border = "1px solid red";
+          }
+          if(Tid.value=="") {
+              Tid.focus();
+              document.getElementById('Ti').style.color = "red";
+              document.getElementById('Tid').style.border = "1px solid red";
+          }
+          if(Tclass.value==""){
+              Tclass.focus();
+              document.getElementById('Tc').style.color = "red";
+              document.getElementById('Tclass').style.border = "1px solid red";
+          }
+           return;
+      }
+      //获取答案
+      var anw1 = tk1.value();       //获取填空题答案
+      var anw2_0 = tk2_0.value, anw2_1 = tk2_1.value, anw2_2 = tk2_2.value;
+      //获取单选题答案
+      var obox = document.getElementById("xzt1");
+      radios = obox.getElementsByTagName("input");
+      for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked == true) {
+              var anw3 = radios[i].value
+          }
+      }
+      var obox = document.getElementById("xzt2");
+        radios = obox.getElementsByTagName("input");
+        for (var i = 0; i < radios.length; i++) {
+            if (radios[i].checked == true) {
+                var anw4 = radios[i].value
+            }
+        }
+       //获取多选题答案
+      var s = document.getElementsByName("dx1");
+      var anw5 = "";
+      for( var i = 0; i<s.length; i++ ) {
+          if ( s[i].checked ){
+              anw5+=s[i].value;
+          }
+      }
+      var s = document.getElementsByName("dx2");
+      var anw6 = "";
+      for( var i = 0; i<s.length; i++ ) {
+          if ( s[i].checked ){
+              anw6+=s[i].value;
+          }
+      }
+      //获取判断题答案
+      var obox = document.getElementById("pdt1");
+      radios = obox.getElementsByTagName("input");
+      for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked == true) {
+              var anw7 = radios[i].value
+          }
+      }
+      var obox = document.getElementById("pdt2");
+      radios = obox.getElementsByTagName("input");
+      for (var i = 0; i < radios.length; i++) {
+          if (radios[i].checked == true) {
+              var anw8 = radios[i].value
+          }
+      }
+      //获取简答题答案
+      var anw9=jd1.value;
+      //判断答案并计分(多选题只要有一个选项错误，则扣该题全部的分,填空题和简答题只要内容有一点不一样，则扣该题全部的分)
+      var sum=0  //成绩
+      if(anw1=="统一建模语言"){
+          sum+=5;
+      }
+      if(anw2_0=="封装性"| anw2_0=="继承性"| anw2_0=="多态性"){
+          sum+=5;
+      }
+      if((anw2_1=="封装性"| anw2_1=="继承性"| anw2_1=="多态性")&anw2_1!=anw2_0){
+          sum+=5;
+      }
+      if((anw2_2=="封装性"| anw2_2=="继承性"| anw2_2=="多态性")&anw2_2!=anw2_1&anw2_2!=anw2_0){
+          sum+=5;
+      }
+      if(anw3=="B"){
+          sum+=10;
+      }
+      if(anw4=="A"){
+          sum+=10;
+      }
+      if(anw5=="ACD"){
+          sum+=10;
+      }
+      if(anw6=="ABC"){
+          sum+=10;
+      }
+      if(anw7=="false"){
+          sum+=10;
+      }
+      if(anw8=="true"){
+          sum+=10;
+      }
+      if(anw9=="模型是对现实世界的简化和抽象，模型是对所研究的系统、过程、事物或概念的一种表达形式。可以是物理实体；可以是某种图形；或者是一种数学表达式。"){
+          sum+=20;
+      }
+      ach.value=sum;
+      alert("得分为："+sum);
+      ach.focus();
+  }
+
+</script>
+<div class="bt">统一建模语言理论测试</div>
+<div class="top">
+  <div class="suj">考试科目：统一建模语言</div>
+  <div class="time">时间：100分钟</div>
+  <div class="ach">得分：<input type="text" id="ach" style="color: red;border: 0px;font-weight: bold ;"></div>
+</div>
+<div class="inf">
+  <div class="class">
+    <form id="form1" name="form1" method="post" action="">
+      <label for="Tclass" id="Tc">班级(必填)：</label>
+      <input type="text" name="Tclass" id="Tclass" />
+    </form>
+  </div>
+  <div class="id">
+    <form id="form2" name="form2" method="post" action="">
+      <label for="Tid" id="Ti">学号(必填)：</label>
+      <input type="text" name="Tid" id="Tid" />
+    </form>
+  </div>
+  <div class="name">
+    <form id="form3" name="form3" method="post" action="">
+      <label for="Tname" id="Tn">姓名(必填)：</label>
+      <input type="text" name="Tname" id="Tname" />
+    </form>
+  </div>
+</div>
+<div class="tkt">
+  <div class="t-top">一、填空题(每空5分,共20分)</div>
+  <div class="t-main">
+    <form id="tk" name="tk" method="post">
+      <p><label for="tk1">1.UML的中文全称是：</label></p><p style="text-indent:4.2%;"><input type="text" id="tk1";></p>
+      <p><label>2.对象最突出的特征是：</label></p><p style="text-indent: 4.2%;"><input type="text" id="tk2_0";><label>&nbsp;</label><input type="text" id="tk2_1";><label>&nbsp;</label><input type="text" id="tk2_2";></p>
+    </form>
+  </div>
+</div>
+  <div class="xzt">
+    <div class="x-top">二、选择题(每题10分,共20分)</div>
+    <div class="x-main">
+      <form id="xzt1" name="form6" method="post" action="">
+      <p>1.UML与软件工程的关系是：</p>
+      <label style="margin: 4%">
+        <input type="radio" name="xz1" value="A" id="xz1_0" />
+        (A)UML就是软件工程</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="radio" name="xz1" value="B" id="xz1_1" />
+        (B)UML参与到软件工程中软件开发过程的几个阶段</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="radio" name="xz1" value="C" id="xz1_2" />
+        (C)UML与软件工程无关</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="radio" name="xz1" value="D" id="xz1_3" />
+        (D)UML是软件工程的一部分</label>
+      <br />
+      </p>
+    </form>
+      <form id="xzt2" name="form7" method="post" action="">
+        <p>2.Java语言支持:</p>
+        <label style="margin: 4%">
+          <input type="radio" name="xz2" value="A" id="xz2_0" />
+          (A)单继承</label>
+        <br />
+        <label style="margin: 4%">
+          <input type="radio" name="xz2" value="B" id="xz2_1" />
+          (B)多继承</label>
+        <br />
+        <label style="margin: 4%">
+          <input type="radio" name="xz2" value="C" id="xz2_2" />
+          (C)单继承和多继承都支持</label>
+        <br />
+        <label style="margin: 4%">
+          <input type="radio" name="xz2" value="D" id="xz2_3" />
+          (D)单继承和多继承都不支持</label>
+        <br />
+        </p>
+      </form>
+    </div>
+  </div>
+<div class="dxt">
+  <div class="d-top">三、多项选择题(每题10分,共20分)</div>
+  <div class="d-main">
+    <form id="dxt1" name="form8" method="post" action="">
+      <p>1.用例的粒度分为以下三种：</p>
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx1" value="A" id="dx1_0" />
+        (A)概述级</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx1" value="B" id="dx1_1" />
+        (B)需求级</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx1" value="C" id="dx1_2" />
+        (C)用户目标级</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx1" value="D" id="dx1_3" />
+        (D)子功能级</label>
+      <br />
+      </p>
+    </form>
+    <form id="dxt2" name="form9" method="post" action="">
+      <p>2.类图由以下哪三部分组成：</p>
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx2" value="A" id="dx2_0" />
+        (A)名称(name)</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx2" value="B" id="dx2_1" />
+        (B)属性(Attribute)</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx2" value="C" id="dx2_2" />
+        (C)操作(Operation)</label>
+      <br />
+      <label style="margin: 4%">
+        <input type="checkbox" name="dx2" value="D" id="dx2_3" />
+        (D)方法(Function)</label>
+      <br />
+      </p>
+    </form>
+  </div>
+</div>
+<div class="pdt">
+  <div class="p-top">四、判断题(每题10分,共20分)</div>
+  <div class="p-main">
+    <form id="pdt1" name="pdt1" method="post" action="">
+      <p>1.用例图只是用于和客户交流和沟通的，用于确定需求。
+        <label>
+          <input type="radio" name="pd1" value="true" id="pd1_0" />
+          <img src="img/true.jpg" alt=""/></label>
+        <label>
+          <input type="radio" name="pd1" value="false" id="pd1_1" />
+          <img src="img/false.jpg" alt=""/></label>
+      </p>
+    </form>
+    <form id="pdt2" name="pdt2" method="post" action="">
+      <p>2.在状态图中，终止状态在一个状态图中允许有任意多个。  <label>
+        <input type="radio" name="pd2" value="true" id="pd2_0" />
+        <img src="img/true.jpg" alt=""/></label>
+        <label>
+          <input type="radio" name="pd2" value="false" id="pd2_1" />
+          <img src="img/false.jpg" alt=""/></label>
+      </p>
+    </form>
+  </div>
+</div>
+<div class="jdt">
+  <div class="j-top">五、简答题（每题20分,共20分)</div>
+  <div class="j-main">
+    <form id="jd" name="" method="post" action="">
+      <p>
+        <label for="jd1">1.简述什么是模型及模型的表现形式？<br />
+        </label></p>
+      <p style="margin: 1%">
+        <textarea name="jd1" id="jd1" cols="45" rows="5" style="width: 80%;height: 80px;overflow: hidden"></textarea>
+      </p>
+    </form>
+  </div>
+</div>
+<div class="but">
+<input type="button" id="bt" value="计算分数" style="margin-left:auto; background-color:#428BCA;" onclick="button1()"/>
+</div>
+</body>
+</html>

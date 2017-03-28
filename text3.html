@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html" charset="utf-8"/>
+    <title>统一建模语言理论测试</title>
+    <link href="css/test2.css" rel="stylesheet"/>
+    <script src="jquery/jquery-3.1.1.min.js"></script>
+    <script src="jquery/jquery.validate.min.js"></script>
+    <script src="jquery/messages_zh.js"></script>
+    <script>
+        function JqValidate() {
+            return $('#form1').validate({    //使用Jquery中的validate插件进行必填项验证
+                rules: {
+                    Tclass: "required",
+                    Tid:{
+                        required:true,
+                        minlength:14
+                    },
+                    Tname: "required"
+                },
+                messages: {
+                    Tclass: "请输入班级",
+                    Tid:{
+                        required:"请输入学号",
+                        minlength:"学号为14位"
+                    },
+                    Tname: "请输入姓名"
+                }
+            });
+        }
+        function button() {
+            if (JqValidate())
+                $('#form1').submit();
+            $("#Tc,#Ti,#Tn").removeAttr("style", "color:red");                   //初始化文本框
+            $("#Tclass,#Tid,#Tname").removeAttr("style", "border:red");
+            $('#Tname,#Tid,#Tclass').attr("style", "width:35%")
+            var inf1 = $('#Tclass').val();                                       //必填项验证
+            var inf2 = $('#Tid').val();
+            var inf3 = $('#Tname').val();
+            if (inf1 == '' || inf2 == '' || inf3 == '') {
+                alert("请检查并填写必填信息!")
+                if (inf3 == "") {
+                    $('#Tname').focus();
+                    $('#Tn').attr("style", "color:red")
+                    $('#Tname').attr("style", "border:solid red;width:35%")
+                }
+                if (inf2 == "") {
+                    $('#Tid').focus();
+                    $('#Ti').attr("style", "color:red")
+                    $('#Tid').attr("style", "border:solid red;width:35%")
+                }
+                if (inf1 == "") {
+                    $('#Tclass').focus();
+                    $('#Tc').attr("style", "color:red")
+                    $('#Tclass').attr("style", "border:solid red;width:35%")
+                }
+                return false;
+            }
+            //获取答案
+            var anw1 = $('#tk1').val();                          //填空题
+            var anw2_0 = $('#tk2_0').val(), anw2_1 = $('#tk2_1').val(), anw2_2 = $('#tk2_2').val();
+            //选择题
+            var anw3 = $('#xzt input[name="xz1"]:checked').val();
+            var anw4 = $('#xzt input[name="xz2"]:checked').val();
+            var anw5 = '', anw6 = '';                            //多选题
+            $("input[name='dx1']:checked").each(function () {
+                anw5 += $(this).val();
+            })
+            $("input[name='dx2']:checked").each(function () {
+                anw6 += $(this).val();
+            })
+            var anw7 = $('#pdt input[name="pd1"]:checked').val();//判断题
+            var anw8 = $('#pdt input[name="pd2"]:checked').val();
+            var anw9 = $('#jd1').val();                          //简答题
+            //判断答案并计分(多选题只要有一个选项错误，则扣该题全部的分,填空题和简答题只要内容有一点不一样，则扣该题全部的分)
+            var sum = 0  //成绩
+            if (anw1 == "统一建模语言") {
+                sum += 5;
+            }
+            if (anw2_0 == "封装性" | anw2_0 == "继承性" | anw2_0 == "多态性") {
+                sum += 5;
+            }
+            if ((anw2_1 == "封装性" | anw2_1 == "继承性" | anw2_1 == "多态性") & anw2_1 != anw2_0) {
+                sum += 5;
+            }
+            if ((anw2_2 == "封装性" | anw2_2 == "继承性" | anw2_2 == "多态性") & anw2_2 != anw2_1 & anw2_2 != anw2_0) {
+                sum += 5;
+            }
+            if (anw3 == "B") {
+                sum += 10;
+            }
+            if (anw4 == "A") {
+                sum += 10;
+            }
+            if (anw5 == "ACD") {
+                sum += 10;
+            }
+            if (anw6 == "ABC") {
+                sum += 10;
+            }
+            if (anw7 == "false") {
+                sum += 10;
+            }
+            if (anw8 == "true") {
+                sum += 10;
+            }
+            if (anw9 == "模型是对现实世界的简化和抽象，模型是对所研究的系统、过程、事物或概念的一种表达形式。可以是物理实体；可以是某种图形；或者是一种数学表达式。") {
+                sum += 20;
+            }
+            $('#ach').val(sum);
+            $('body').animate({scrollTop: '0'}, 300);
+        }
+    </script>
+    <style>
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<form id="form1" name="inf" target="rfFrame" method="get" action="">
+    <iframe id="rfFrame" name="rfFrame" src="about:blank" style="display:none;"></iframe>
+    <div class="bt">统一建模语言理论测试</div>
+    <div class="top">
+        <div class="suj">考试科目：统一建模语言</div>
+        <div class="time">时间：100分钟</div>
+        <div class="ach">得分：<input type="text" id="ach"
+                                   style="color: red;border: 0px;font-weight: bold ; font-size: 125%; width: 20%"
+                                   onfocus="this.blur()"></div>
+    </div>
+    <div class="inf">
+        <div class="class">
+            <label for="Tclass" id="Tc">班级(必填)：</label>
+            <input type="text" name="Tclass" id="Tclass" style="width: 35%;"/>
+        </div>
+        <div class="id">
+            <label for="Tid" id="Ti">学号(必填)：</label>
+            <input type="text" name="Tid" id="Tid" style="width: 35%;"/>
+        </div>
+        <div class="name">
+            <label for="Tname" id="Tn">姓名(必填)：</label>
+            <input type="text" name="Tname" id="Tname" style="width: 35%;"/>
+        </div>
+    </div>
+    <div class="tkt">
+        <div class="t-top">一、填空题(每空5分,共20分)</div>
+        <div class="t-main">
+            <p><label for="tk1">1.UML的中文全称是：</label></p>
+            <p style="text-indent:4.2%;"><input type="text" id="tk1" ;></p>
+            <p><label>2.对象最突出的特征是：</label></p>
+            <p style="text-indent: 4.2%;"><input type="text" id="tk2_0" ;><label>&nbsp;</label><input type="text"
+                                                                                                      id="tk2_1"
+                                                                                                      ;><label>
+                &nbsp;</label><input type="text" id="tk2_2" ;></p>
+        </div>
+    </div>
+    <div class="xzt">
+        <div class="x-top">二、选择题(每题10分,共20分)</div>
+        <div class="x-main" id="xzt">
+            <p>1.UML与软件工程的关系是：</p>
+            <label style="margin: 4%">
+                <input type="radio" name="xz1" value="A" id="xz1_0"/>
+                (A)UML就是软件工程</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz1" value="B" id="xz1_1"/>
+                (B)UML参与到软件工程中软件开发过程的几个阶段</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz1" value="C" id="xz1_2"/>
+                (C)UML与软件工程无关</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz1" value="D" id="xz1_3"/>
+                (D)UML是软件工程的一部分</label>
+            <br/>
+            </p>
+            <p>2.Java语言支持:</p>
+            <label style="margin: 4%">
+                <input type="radio" name="xz2" value="A" id="xz2_0"/>
+                (A)单继承</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz2" value="B" id="xz2_1"/>
+                (B)多继承</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz2" value="C" id="xz2_2"/>
+                (C)单继承和多继承都支持</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="radio" name="xz2" value="D" id="xz2_3"/>
+                (D)单继承和多继承都不支持</label>
+            <br/>
+            </p>
+        </div>
+    </div>
+    <div class="dxt">
+        <div class="d-top">三、多项选择题(每题10分,共20分)</div>
+        <div class="d-main" id="dxt">
+            <p>1.用例的粒度分为以下三种：</p>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx1" value="A" id="dx1_0"/>
+                (A)概述级</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx1" value="B" id="dx1_1"/>
+                (B)需求级</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx1" value="C" id="dx1_2"/>
+                (C)用户目标级</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx1" value="D" id="dx1_3"/>
+                (D)子功能级</label>
+            <br/>
+            </p>
+            <p>2.类图由以下哪三部分组成：</p>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx2" value="A" id="dx2_0"/>
+                (A)名称(name)</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx2" value="B" id="dx2_1"/>
+                (B)属性(Attribute)</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx2" value="C" id="dx2_2"/>
+                (C)操作(Operation)</label>
+            <br/>
+            <label style="margin: 4%">
+                <input type="checkbox" name="dx2" value="D" id="dx2_3"/>
+                (D)方法(Function)</label>
+            <br/>
+            </p>
+        </div>
+    </div>
+    <div class="pdt">
+        <div class="p-top">四、判断题(每题10分,共20分)</div>
+        <div class="p-main" id="pdt">
+            <p>1.用例图只是用于和客户交流和沟通的，用于确定需求。
+                <label>
+                    <input type="radio" name="pd1" value="true" id="pd1_0"/>
+                    <img src="img/true.jpg" alt=""/></label>
+                <label>
+                    <input type="radio" name="pd1" value="false" id="pd1_1"/>
+                    <img src="img/false.jpg" alt=""/></label>
+            </p>
+            <p>2.在状态图中，终止状态在一个状态图中允许有任意多个。 <label>
+                <input type="radio" name="pd2" value="true" id="pd2_0"/>
+                <img src="img/true.jpg" alt=""/></label>
+                <label>
+                    <input type="radio" name="pd2" value="false" id="pd2_1"/>
+                    <img src="img/false.jpg" alt=""/></label>
+            </p>
+        </div>
+    </div>
+    <div class="jdt">
+        <div class="j-top">五、简答题（每题20分,共20分)</div>
+        <div class="j-main">
+            <p>
+                <label for="jd1">1.简述什么是模型及模型的表现形式？<br/>
+                </label></p>
+            <p style="margin: 1%">
+                <textarea name="jd1" id="jd1" cols="45" rows="5"
+                          style="width: 80%;height: 80px;overflow: hidden"></textarea>
+            </p>
+        </div>
+    </div>
+    <div class="but">
+        <input class="submit" type="button" onclick="button()" id="bt" value="计算分数">
+    </div>
+</form>
+</body>
+</html>
